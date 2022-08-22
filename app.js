@@ -5,8 +5,10 @@ const listItems = []
 
 getData()
 
+// Search implementation using user input
+filter.addEventListener('input', (event) => filterData(event.target.value))
 
-
+// Get data from API
 async function getData() {
     const response = await fetch("https://randomuser.me/api?results=100")
 
@@ -31,4 +33,17 @@ async function getData() {
         result.appendChild(li)
     });
 
+}
+
+
+// Search functions and hide non-matching
+function filterData(searchQuery) {
+
+    listItems.forEach(item => {
+        if (item.innerText.toLowerCase().includes(searchQuery.toLowerCase())) {
+            item.classList.remove('hide')
+        } else {
+            item.classList.add('hide')
+        }
+    })
 }
